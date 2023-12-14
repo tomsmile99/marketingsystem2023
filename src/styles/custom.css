@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree&family=Kanit:wght@300;400&family=Prompt:ital@0;1&family=Roboto:wght@400;500&display=swap');
+
+body {
+    font-family: 'Bai Jamjuree', sans-serif !important;
+}
+
+.fadeIn {
+  animation: fadeInAnimation .3s linear;
+}
+
+
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.cursor_P{
+  cursor : pointer;
+}
+
+.textBtn{
+  font-size:10pt;
+  font-weight: bold;
+}
+
+
+select{
+  cursor : pointer;
+}
+
+
+.borderRed{
+  border: 1px solid rgb(255, 0, 0);
+}
+
+table tbody tr td {
+  font-size: 10pt;
+}
+
+.fb{
+  font-weight: bold;
+}
+.textRed {
+  color: red;
+}
+
