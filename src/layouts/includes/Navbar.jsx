@@ -13,7 +13,7 @@ const Navbar = ({FullnamePer}) => {
   
   const getstore = useRecoilValue(userToken)
   const _AgU = Base64.decode(getstore.AgU)
-  const _PerPST = Base64.decode(getstore.PerPST)
+  //const _PerPST = Base64.decode(getstore.PerPST)
   const _PerWP = Base64.decode(getstore.PerWP)
 
   return (
@@ -79,85 +79,67 @@ const Navbar = ({FullnamePer}) => {
                     data-accordion="false"
                   >
                     {/* Add icons to the links using the .nav-icon class
-         with font-awesome or any other icon font library */}
+                      with font-awesome or any other icon font library */}
                     <li className="nav-item">
                       <a className="nav-link" href={BASE_URL_Dashboardd}>
                         <i className="nav-icon fas fa-reply"></i>
                         <p>กลับหน้าหลัก</p>
                       </a>
                     </li>
+                    {(_AgU === 'AGAD' || _PerWP === 'WP0012') && (
+                      <>
                     <li className="nav-header">เมนูการจัดการ</li>
-                    <li className={`${location.pathname === '/' || location.pathname === '/AppTest2' ? 'menu-open' : ''} nav-item`}>
-                      <a href="#" className={`${location.pathname === '/' || location.pathname === '/AppTest2' ? 'active' : ''} nav-link`}>
-                        <i className="nav-icon fas fa-tachometer-alt" />
+                    <li className={`${location.pathname === '/' || location.pathname === '/AddSolarRoofTopForm' ? 'menu-open' : ''} nav-item`}>
+                      <a href="#" className={`${location.pathname === '/' || location.pathname === '/AddSolarRoofTopForm' ? 'active' : ''} nav-link`}>
+                        <i className="nav-icon fas fa-solar-panel" />
                         <p>
-                          งานขายโซลาร์รูฟท๊อป
+                          งานขายโซลาร์รูฟท็อป
                           <i className="right fas fa-angle-left" />
                         </p>
                       </a>
-                      <ul className="nav nav-treeview" style={{display: location.pathname === '/' || location.pathname === '/AppTest2' ? 'block' : 'none'}}>
+                      <ul className="nav nav-treeview" style={{display: location.pathname === '/' || location.pathname === '/AddSolarRoofTopForm' ? 'block' : 'none'}}>
                         <li className="nav-item">
-                          <NavLink to="/" className={`${location.pathname === '/' ? 'active' : ''} nav-link`}>
+                          <NavLink to="/" className={`${location.pathname === '/' || location.pathname === '/AddSolarRoofTopForm' ? 'active' : ''} nav-link`}>
                             <i className="fas fa-angle-right nav-icon" />
-                            <p>แบบฟอร์มที่ 1</p>
+                            <p>ข้อมูลใบจองโซลาร์รูฟท็อป</p>
                           </NavLink>
                         </li>
                         <li className="nav-item">
                           <NavLink to="/AppTest2" className={`${location.pathname === '/AppTest2' ? 'active' : ''} nav-link`}>
                           <i className="fas fa-angle-right nav-icon" />
-                            <p>แบบฟอร์มที่ 2</p>
+                            <p>รอส่งแบบสำรวจ</p>
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink to="/AppTest3" className={`${location.pathname === '/AppTest3' ? 'active' : ''} nav-link`}>
+                          <i className="fas fa-angle-right nav-icon" />
+                            <p>รอแจ้งเลขรับอกสาร</p>
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink to="/AppTest4" className={`${location.pathname === '/AppTest4' ? 'active' : ''} nav-link`}>
+                          <i className="fas fa-angle-right nav-icon" />
+                            <p>รอยืนยันการทำสินเชื่อ</p>
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink to="/AppTest4" className={`${location.pathname === '/AppTest4' ? 'active' : ''} nav-link`}>
+                          <i className="fas fa-angle-right nav-icon" />
+                            <p>สถานะการติดตั้งโซลาร์</p>
                           </NavLink>
                         </li>
                       </ul>
                     </li>
-                    <li className="nav-item ">
-                      <NavLink to="/AppTest3" className={`${location.pathname === '/AppTest3' ? 'active' : ''} nav-link`}>
-                        <i className="nav-icon fas fa-clipboard-list" />
-                        <p>แจ้งเลขที่ใบเสร็จ 3</p>
-                      </NavLink>
-                    </li>
 
-                    {(_AgU === 'AGAD' || _PerPST === 'PST015' || _PerPST === 'PST019' || _PerPST === 'PST020' || _PerPST === 'PST021' || _PerPST === 'PST022' || _PerPST === 'PST023' || _PerPST === 'PST024' || _PerPST === 'PST025' ||  _PerPST === 'PST083' || _PerPST ==='PST084') && (
-                      <>
-                        <li className="nav-item">
-                          <NavLink to="/" className={`${location.pathname === '/' || location.pathname === '/AddInsuranceForm' ? 'active' : ''} nav-link`}>
-                            <i className="nav-icon fas fa-car-crash" />
-                            <p>แจ้งข้อมูลประกันภัย</p>
-                          </NavLink>
-                        </li>
-                      </>
-                    )}
-                    {(_AgU === 'AGAD' || _PerWP === 'WP0013') && (
-                      <>
-                        <li className="nav-header">เมนูสำหรับเจ้าหน้าที่</li>
-                          <li className="nav-item">
-                            <NavLink to="/AdminISR/DataISRs" className={`${location.pathname === '/AdminISR/DataISRs' ? 'active' : ''} nav-link`}>
-                              <i className="nav-icon fas fa-inbox"/>
-                              <p>
-                                รายการแจ้งทำประกันภัย <span style={{fontSize: 10}} className="badge badge-danger">200</span>
-                              </p>
-                            </NavLink>
-                          </li>
-                      </>
-                    )}
+
+            
                     <li className="nav-header">รายงาน</li>
-                    {(_AgU === 'AGAD' || _PerPST === 'PST015' || _PerPST === 'PST019' || _PerPST === 'PST020' || _PerPST === 'PST021' || _PerPST === 'PST022' || _PerPST === 'PST023' || _PerPST === 'PST024' || _PerPST === 'PST025' ||  _PerPST === 'PST083' || _PerPST ==='PST084') && (
-                      <>
+             
+                    
                         <li className="nav-item">
                           <NavLink to="/report" className={`${location.pathname === '/report' ? 'active' : ''} nav-link`}>
                             <i className="nav-icon fas fa-chart-bar"/>
-                            <p>รายงานสรุปการขายประกันภัย</p>
-                          </NavLink>
-                        </li>
-                      </>
-                    )}
-
-                    {(_AgU === 'AGAD' || _PerWP === 'WP0013' || _PerPST === 'PST003' || _PerPST === 'PST007' || _PerPST === 'PST009' || _PerPST === 'PST010' || _PerPST === 'PST011' || _PerPST === 'PST012' || _PerPST === 'PST013' || _PerPST === 'PST014') && (
-                      <>
-                        <li className="nav-item">
-                          <NavLink to="/AdminISR/report" className={`${location.pathname === '/AdminISR/report' ? 'active' : ''} nav-link`}>
-                            <i className="nav-icon fas fa-chart-bar"/>
-                            <p>รายงานสรุปการขายประกันภัย</p>
+                            <p>รายงานสรุปการขายโซลาร์รูฟฯ</p>
                           </NavLink>
                         </li>
                       </>

@@ -1,14 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import {BASE_URL_Dashboardd} from '../../../apiUrl/Api_Url'
+import AddData from '../../../setreadDatas/jobsolarrooftop/Datasolarrooftops/AddData';
 
 
-import AddData from '../../../setreadDatas/user/DataInsurance/AddData';
-
-
-
-
-
-const AddDataInsurance = () => {
+const AddForm = () => {
   return (
     <>
       <div className="fadeIn">
@@ -16,20 +11,21 @@ const AddDataInsurance = () => {
           <div className="container-fluid">
             <div className="row mb-2 mt-2">
               <div className="col-sm-12 col-md-4">
-                <h1 style={{fontWeight: 'bold'}}><i className="fas fa-file-medical"></i> เพิ่มรายการแจ้งข้อมูลประกันภัย</h1>
+                <h1 style={{fontWeight: 'bold'}}><i className="fas fa-cart-plus"></i> ยื่นใบจองโซลาร์รูฟท็อป</h1>
               </div>
               <div className="col-sm-12 col-md-8">
                 <ol className="breadcrumb float-sm-right">
                   <li className="breadcrumb-item">
                     <a href={BASE_URL_Dashboardd}><i className="fas fa-home"></i> หน้าหลัก</a>
                   </li>
-                  <li className="breadcrumb-item">ระบบบริหารจัดการงานประกันภัย</li>
+                  <li className="breadcrumb-item">ระบบบริหารจัดการงานการตลาด</li>
+                  <li className="breadcrumb-item">งานขายโซลาร์รูฟท็อป</li>
                   <li className="breadcrumb-item">
                     <NavLink to="/">
-                      รายการแจ้งข้อมูลประกันภัย
+                      ข้อมูลใบจองโซลาร์รูฟท็อป
                     </NavLink>
                   </li>
-                  <li className="breadcrumb-item active">เพิ่มรายการแจ้งข้อมูลประกันภัย</li>
+                  <li className="breadcrumb-item active">ยื่นใบจองโซลาร์รูฟท็อป</li>
                 </ol>
               </div>
             </div>
@@ -46,4 +42,4 @@ const AddDataInsurance = () => {
   )
 }
 
-export default AddDataInsurance
+export default AddForm
