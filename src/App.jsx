@@ -11,8 +11,10 @@ import Navbar from './layouts/includes/Navbar'
 import Footer from './layouts/includes/Footer'
 
 
+import DataDashboard from "./setDefaultPages/Dashboard"; //Dashboard
 import DataSolarRoofTops from "./setDefaultPages/jobsolarrooftop/Datasolarrooftops/DataForm"; //รายการยื่นใบจอง
 import AddSolarRoofTopForm from "./setDefaultPages/jobsolarrooftop/Datasolarrooftops/AddForm"; //เพิ่มใบจอง
+
 //import DataISRs from "./setDefaultPages/admin/DataISRs";
 //import AppTest3 from "./setDefaultPages/AppTest3";
 
@@ -42,19 +44,27 @@ const App = () => {
     }else{
       return (
         <>
-          {/* <Router basename={'/SAKInsurance/'}> */}
+          {/* <Router basename={'/MarketingSystem/'}> */}
           <Router>
             <Header/>
             <Navbar FullnamePer={fullnamePer}/>
               <div className="content-wrapper">
                 <Routes>
                   {/* FrontEnd */}
-                  <Route>
-                    <Route path="/" exact={true} element={<DataSolarRoofTops/>}></Route>
-                    <Route path="/AddSolarRoofTopForm" exact={true} element={<AddSolarRoofTopForm/>}></Route>
+             
+                    <Route path="/" exact={true} element={<DataDashboard/>}/>
+                    <Route path="/DataSolarRoofTops" exact={true} element={<DataSolarRoofTops/>}/>
+
+                
+                    <Route path="/DataSolarRoofTops/AddDataForm" exact={true} element={<AddSolarRoofTopForm/>}/>
+                    
+                    {/* <Route path="DataSolarRoofTops">
+                      <Route path="AddDataForm" element={<AddSolarRoofTopForm />} />
+                    </Route> */}
+
                     {/* <Route path="/AdminISR/DataISRs" exact={true} element={<DataISRs/>}></Route>
                     <Route path="/AppTest3" exact={true} element={<AppTest3/>}></Route> */}
-                  </Route>
+              
                 </Routes>
               </div>
             <Footer/>

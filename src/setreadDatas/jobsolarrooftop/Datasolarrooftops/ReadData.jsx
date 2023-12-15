@@ -8,8 +8,8 @@ const ReadDataInsurance = () => {
         <div className="card-header">
           <div className="mt-2 row">
             <div className="col-md-6 text-left mb-2">
-              <NavLink to="/AddSolarRoofTopForm" type="button" className="text-white btn btn-outline-primary btn-rounded btn-sm  font-weight-bold">
-                <i className="fas fa-cart-plus mr-1" /> ยื่นใบจองโซลาร์รูฟท็อป
+              <NavLink to="/DataSolarRoofTops/AddDataForm" type="button" className="text-white btn btn-outline-primary btn-rounded btn-sm  font-weight-bold">
+                <i className="fas fa-file-medical mr-1"></i> ยื่นใบจองโซลาร์รูฟท็อป
               </NavLink>
             </div>
             <div className="col-md-6 text-right mb-2">

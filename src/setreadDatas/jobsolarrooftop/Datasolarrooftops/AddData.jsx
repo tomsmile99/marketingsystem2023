@@ -27,16 +27,16 @@ const AddData = () => {
   const sendForm = (data) => {
 
     const newdatas = {
-      first: 'Wes',
-      last: 'Bos',
+      firstNew: 'Wes',
+      lastNew: 'Bos',
     };
 
-    const newData = {
+    const newDataSend = {
       ...data,
       ...newdatas
     };
 
-    console.log(newData)
+    console.log(newDataSend)
   }
 
   return (
@@ -45,7 +45,7 @@ const AddData = () => {
         <div className="card-header">
           <div className="mt-2 row">
             <div className="col text-left mb-2">
-              <NavLink to="/"><b><i className="fas fa-reply"></i> ย้อนกลับ</b></NavLink>
+              <NavLink to="/DataSolarRoofTops"><b><i className="fas fa-reply"></i> ย้อนกลับ</b></NavLink>
             </div>
             <div className="col text-right mb-2">
               <b><i className="fas fa-file-alt"></i> ฟอร์มยื่นใบจองโซลาร์รูฟท็อป</b>
@@ -62,10 +62,11 @@ const AddData = () => {
           </div>
           
           <form onSubmit={handleSubmit(sendForm)}>
-            <input {...register('firstName')} />
+            <input {...register('firstName', { required: true })} />
+            {errors.lastName && <p>Frist name is required.</p>}
             <input {...register('lastName', { required: true })} />
             {errors.lastName && <p>Last name is required.</p>}
-            <input {...register('age', { pattern: /\d+/ })} />
+            <input {...register('age', { required: true, pattern: /\d+/ })} />
             {errors.age && <p>Please enter number for age.</p>}
             <input type="submit" />
           </form>
@@ -132,7 +133,7 @@ const AddData = () => {
               <button type="submit" className="btn btn-primary btn-sm mr-2" id="Confrim_SaveForm"><span style={{fontSize: '10pt', fontWeight: 'bold'}}><i className="far fa-save" /> บันทึกข้อมูล</span></button>
               <button type="button" className="btn btn-primary btn-sm disabled" id="Confrim_SaveForm_wait" style={{display: 'none'}}><span style={{fontSize: '10pt', fontWeight: 'bold'}}> <span className="mb-1 spinner-border spinner-border-sm" role="status" aria-hidden="true" /> กรุณารอสักครู่..</span></button>
 
-              <NavLink to="/" type="button" className="btn btn-sm btn-secondary" id="btnback">
+              <NavLink to="/DataSolarRoofTops" type="button" className="btn btn-sm btn-secondary" id="btnback">
                 <span style={{fontSize: '10pt', fontWeight: 'bold'}}>ยกเลิก</span>
               </NavLink>
             </div>

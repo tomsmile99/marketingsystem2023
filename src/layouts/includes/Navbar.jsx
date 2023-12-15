@@ -16,13 +16,15 @@ const Navbar = ({FullnamePer}) => {
   //const _PerPST = Base64.decode(getstore.PerPST)
   const _PerWP = Base64.decode(getstore.PerWP)
 
+
+
   return (
     <>
       <aside className="main-sidebar elevation-4 sidebar-light-primary">
         {/* Brand Logo */}
         <NavLink to="/" className="brand-link">
           <img
-            src='assets/img/img_icon/logo saksiam59(150x150px).png'
+            src={import.meta.env.BASE_URL + `assets/img/img_icon/logo saksiam59(150x150px).png`}
             alt="Saksiam Logo"
             className="brand-image img-circle elevation-3"
           />
@@ -60,7 +62,7 @@ const Navbar = ({FullnamePer}) => {
                 <div className="user-panel mt-3 pb-3 mb-3 d-flex">
                   <div className="image">
                     <img
-                      src='assets/img/user_icon(40x40).png'
+                      src={import.meta.env.BASE_URL + `assets/img/user_icon(40x40).png`}
                       alt="User Image"
                       className="img-circle elevation-2"
                     />
@@ -89,17 +91,28 @@ const Navbar = ({FullnamePer}) => {
                     {(_AgU === 'AGAD' || _PerWP === 'WP0012') && (
                       <>
                     <li className="nav-header">เมนูการจัดการ</li>
-                    <li className={`${location.pathname === '/' || location.pathname === '/AddSolarRoofTopForm' ? 'menu-open' : ''} nav-item`}>
-                      <a href="#" className={`${location.pathname === '/' || location.pathname === '/AddSolarRoofTopForm' ? 'active' : ''} nav-link`}>
+                    
+                    <li className="nav-item">
+                      <NavLink to="/" className={`${location.pathname === '/' ? 'active' : ''} nav-link click-text`}>
+                        <i className="nav-icon fas fa-tachometer-alt" />
+                        <p>Dashboard</p>
+                      </NavLink>
+                    </li>
+          
+
+
+
+                    <li className={`${location.pathname === '/DataSolarRoofTops' || location.pathname === '/DataSolarRoofTops/AddDataForm' ? 'menu-open' : ''} nav-item`}>
+                      <a href="#" className={`${location.pathname === '/DataSolarRoofTops' || location.pathname === '/DataSolarRoofTops/AddDataForm' ? 'active' : ''} nav-link`}>
                         <i className="nav-icon fas fa-solar-panel" />
                         <p>
                           งานขายโซลาร์รูฟท็อป
                           <i className="right fas fa-angle-left" />
                         </p>
                       </a>
-                      <ul className="nav nav-treeview" style={{display: location.pathname === '/' || location.pathname === '/AddSolarRoofTopForm' ? 'block' : 'none'}}>
+                      <ul className="nav nav-treeview" style={{display: location.pathname === '/DataSolarRoofTops' || location.pathname === '/DataSolarRoofTops/AddDataForm' ? 'block' : 'none'}}>
                         <li className="nav-item">
-                          <NavLink to="/" className={`${location.pathname === '/' || location.pathname === '/AddSolarRoofTopForm' ? 'active' : ''} nav-link`}>
+                          <NavLink to="/DataSolarRoofTops" className={`${location.pathname === '/DataSolarRoofTops' || location.pathname === '/DataSolarRoofTops/AddDataForm' ? 'active' : ''} nav-link`}>
                             <i className="fas fa-angle-right nav-icon" />
                             <p>ข้อมูลใบจองโซลาร์รูฟท็อป</p>
                           </NavLink>
