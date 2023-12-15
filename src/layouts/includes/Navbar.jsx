@@ -16,19 +16,22 @@ const Navbar = ({FullnamePer}) => {
   //const _PerPST = Base64.decode(getstore.PerPST)
   const _PerWP = Base64.decode(getstore.PerWP)
 
+  const _PerPhotoProfile_N = Base64.decode(getstore.PerPhotoProfile_N)
 
+  //console.log(_PerPhotoProfile_N)
 
   return (
     <>
       <aside className="main-sidebar elevation-4 sidebar-light-primary">
         {/* Brand Logo */}
         <NavLink to="/" className="brand-link">
-          <img
+          {/* <img
             src={import.meta.env.BASE_URL + `assets/img/img_icon/logo saksiam59(150x150px).png`}
             alt="Saksiam Logo"
             className="brand-image img-circle elevation-3"
-          />
-          <span className="brand-text" style={{fontSize: '12.5pt', fontWeight: 'bold'}}>SAKERP (MRK)</span>
+          /> */}
+          <i className="fab fa-opencart fa-2x ml-2"></i>
+          <span className="brand-text ml-3" style={{fontSize: '12.5pt', fontWeight: 'bold'}}>SAKERP (MRK)</span>
         </NavLink>
         {/* Sidebar */}
         <div className="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition">
@@ -62,7 +65,7 @@ const Navbar = ({FullnamePer}) => {
                 <div className="user-panel mt-3 pb-3 mb-3 d-flex">
                   <div className="image">
                     <img
-                      src={import.meta.env.BASE_URL + `assets/img/user_icon(40x40).png`}
+                      src={`https://apimb.sakerp.org/file_photoEMP/` + _PerPhotoProfile_N}
                       alt="User Image"
                       className="img-circle elevation-2"
                     />
