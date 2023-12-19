@@ -49,3 +49,14 @@ table tbody tr td {
   color: red;
 }
 
+.fontBoldHearder{
+  font-size: 11pt;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="radio"] {
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Chrome, Safari, Opera */
+  transform: scale(1.5);
+}

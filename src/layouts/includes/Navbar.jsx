@@ -18,7 +18,7 @@ const Navbar = ({FullnamePer}) => {
 
   const _PerPhotoProfile_N = Base64.decode(getstore.PerPhotoProfile_N)
 
-  //console.log(_PerPhotoProfile_N)
+  //console.log(getstore.PerPhotoProfile_N)
 
   return (
     <>
@@ -65,7 +65,7 @@ const Navbar = ({FullnamePer}) => {
                 <div className="user-panel mt-3 pb-3 mb-3 d-flex">
                   <div className="image">
                     <img
-                      src={`https://apimb.sakerp.org/file_photoEMP/` + _PerPhotoProfile_N}
+                      src={`https://apimb.sakerp.org/file_photoEMP/`+_PerPhotoProfile_N}
                       alt="User Image"
                       className="img-circle elevation-2"
                     />

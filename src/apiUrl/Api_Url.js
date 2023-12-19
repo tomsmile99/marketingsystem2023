@@ -10,3 +10,6 @@ export const BASE_URL_Login = "http://localhost:8080/" //localhost
 
 export const BASE_URL_Dashboardd = "http://localhost:8080/systemApp/dashboard" //localhost
 //export const BASE_URL_Dashboardd = "https://appncar.sakerp.org/systemApp/dashboard" //server
+
+
+export const BASE_URL_ApiMB = "https://apimb.sakerp.org/file_photoEMP/" //server
