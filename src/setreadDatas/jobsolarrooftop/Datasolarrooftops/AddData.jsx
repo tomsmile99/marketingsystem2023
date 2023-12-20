@@ -22,10 +22,12 @@ import { isNumber, idCardCheck } from '../../../layouts/includes/setFuctions/Inp
 
 const AddData = () => {
 
-  const [TitlenameVal, setTitlenameVal] = useState(''); //ตัวแปรในการเลือกคำหน้าชื่อ
-  const [TitlenameOT, setTitlenameOT] = useState(''); //คำหน้าชื่ออื่นๆ
-  //console.log(TitlenameOT)
+  const [TitlenameVal_Sale, setTitlenameVal_Sale] = useState(''); //ตัวแปรในการเลือกคำหน้าชื่อ (ผู้ขาย)
+  const [TitlenameOT_Sale, setTitlenameOT_Sale] = useState(''); //คำหน้าชื่ออื่นๆ (ผู้ขาย)
+  //console.log(TitlenameOT_Sale)
 
+  const [TitlenameVal_CT, setTitlenameVal_CT] = useState(''); //ตัวแปรในการเลือกคำหน้าชื่อ (ลูกค้า)
+  const [TitlenameOT_CT, setTitlenameOT_CT] = useState(''); //คำหน้าชื่ออื่นๆ (ลูกค้า)
 
   const {
     register,
@@ -42,9 +44,20 @@ const AddData = () => {
     const dataSet = {
       stc_BookingDate_Add : DatetimeFM_database(data.stc_BookingDate_Add), // วันที่จอง
       stc_seller_affiliation_Add : 'SAK',  // สังกัดผู้ทำใบจอง
+
+      ////// ผู้ขาย /////
       stc_sa_Titlename_Add : data.stc_sa_Titlename_Add,  // คำนำหน้าชื่อ (ผู้ขาย)
-      stc_sa_TitlenameOT_Add :  TitlenameOT, // คำนำหน้าชื่อ อื่นๆ (ผู้ขาย)
+      stc_sa_TitlenameOT_Add :  TitlenameOT_Sale, // คำนำหน้าชื่อ อื่นๆ (ผู้ขาย)
       stc_sa_Fullname_Add :  data.stc_sa_Fullname_Add, // ชื่อ - นามสกุล (ผู้ขาย)
+      stc_sa_idCard_Add :  data.stc_sa_idCard_Add, // หมายเลขบัตรประชาชน (ผู้ขาย)
+      stc_sa_Phone_Add :  data.stc_sa_Phone_Add, // หมายเลขโทรศัพท์ (ผู้ขาย)
+      
+      ////// ลูกค้า /////
+      stc_ct_Titlename_Add : data.stc_ct_Titlename_Add,  // คำนำหน้าชื่อ (ลูกค้า)
+      stc_ct_TitlenameOT_Add :  TitlenameOT_CT, // คำนำหน้าชื่อ อื่นๆ (ลูกค้า)
+
+      
+
     }
 
     // เมื่อต้องการเอาค่าอื่นเข้ามาเสียบเพิ่มเติม
@@ -57,6 +70,7 @@ const AddData = () => {
       ...dataSet,
       // ...newdatas
     };
+
     console.log(newDataSend)
   }
   
@@ -84,7 +98,6 @@ const AddData = () => {
                 </div>
               </div>
             </div>
-
             {/* <form onSubmit={handleSubmit(sendForm)}>
               <input {...register('firstName', { required: true })} />
               {errors.lastName && <p>Frist name is required.</p>}
@@ -94,8 +107,6 @@ const AddData = () => {
               {errors.age && <p>Please enter number for age.</p>}
               <input type="submit" />
             </form> */}
-
-          
             <div className="mt-2 row">
               <div className="col-md-2 mb-2">
                 <div className="fontBoldHearder"><i className="fas fa-calendar-alt"></i> วันที่จอง <span style={{color: 'red'}}>*</span> : </div> 
@@ -170,7 +181,7 @@ const AddData = () => {
                     selected={field.value}
                     onChange={(data) => {
                       field.onChange(data.value)
-                      setTitlenameVal(data.value)
+                      setTitlenameVal_Sale(data.value)
                     }}
                   />}
                 />
@@ -180,12 +191,12 @@ const AddData = () => {
                   render={() => <div className="text-red mt-1" style={{fontSize: '10pt'}}>*เลือกคำนำหน้าเชื่อ</div>}
                 />
               </div>
-              {TitlenameVal === 'OtherTitle' && (
+              {TitlenameVal_Sale === 'OtherTitle' && (
                 <div className="col-md-1 mb-3">
                   <div className="fontBoldHearder">ระบุ<span style={{color: 'red'}}>*</span> :</div>
                   <input type="text" className={`${errors.stc_BookingDate_Add ? 'borderRed' : ''} form-control`} name="stc_sa_TitlenameOT_Add" id="stc_sa_TitlenameOT_Add" maxLength={50} placeholder="ระบุ" 
                   {...register("stc_sa_TitlenameOT_Add", { required: true})}
-                  onChange={(e) => setTitlenameOT(e.target.value)} 
+                  onChange={(e) => setTitlenameOT_Sale(e.target.value)} 
                   />
                   {errors.stc_sa_TitlenameOT_Add && errors.stc_sa_TitlenameOT_Add.type === "required" && <div className="text-red mt-1" style={{fontSize: '10pt'}}>*โปรดระบุ</div>}
                 </div>
@@ -204,7 +215,7 @@ const AddData = () => {
                   minLength : 13,
                   maxLength : 13,
                   pattern : {
-                    value: /^(0|[1-9]\d*)(\.\d+)?$/
+                    value: /^(0|[0-9]\d*)(\.\d+)?$/
                   },
                   validate : idCardCheck
                 })}
@@ -224,7 +235,7 @@ const AddData = () => {
                   minLength : 10,
                   maxLength : 10,
                   pattern : {
-                    value: /^(0|[1-9]\d*)(\.\d+)?$/
+                    value: /^(0|[0-9]\d*)(\.\d+)?$/
                   }
                 })}
                 />
@@ -233,12 +244,62 @@ const AddData = () => {
                 {errors.stc_sa_Phone_Add && errors.stc_sa_Phone_Add.type === "maxLength" && <div className="text-red mt-1" style={{fontSize: '10pt'}}>*ห้ามเกิน 10 หลัก</div>}
                 {errors.stc_sa_Phone_Add && errors.stc_sa_Phone_Add.type === "pattern" && <div className="text-red mt-1" style={{fontSize: '10pt'}}>*ตัวเลขเท่านั้น</div>}
               </div>
-
-
             </div>{/* /.row */}   
             <hr/>
-
-
+            <div className="row">
+              <div className="col-md-12 mb-2">
+                <div className="callout callout-primary col-md-12">
+                  <span className="font-weight-bold h6 mt-1">ส่วนที่ 2 : ข้อมูลลูกค้า/ผู้ทำสัญญา</span>
+                </div>
+              </div>
+            </div>{/* /.row */}
+            <div className="row mt-2 mb-2">
+              <div className="col-md-2 mb-2">
+                <div className="fontBoldHearder">คำนำหน้าชื่อ ลูกค้า<span style={{color: 'red'}}>*</span> :</div>
+                <Controller
+                  name="stc_ct_Titlename_Add"
+                  control={control}
+                  rules={{ required : true }}
+                  render={({ field }) => <Select
+                    id="stc_ct_Titlename_Add"
+                    placeholder={"เลือกคำนำหน้าเชื่อ"}
+                    options={[
+                      { value: "นาย", label: "นาย" },
+                      { value: "นางสาว", label: "นางสาว" },
+                      { value: "นาง", label: "นาง" },
+                      { value: "OtherTitle", label: "อื่นๆ" }
+                    ]} 
+                    styles={{
+                      control: (baseStyles) => ({
+                        ...baseStyles,
+                        cursor: 'pointer',
+                        border: errors.stc_ct_Titlename_Add ? '1px solid red' : ''
+                      }),
+                    }}
+                    selected={field.value}
+                    onChange={(data) => {
+                      field.onChange(data.value)
+                      setTitlenameVal_CT(data.value)
+                    }}
+                  />}
+                />
+                <ErrorMessage
+                errors={errors}
+                  name="stc_ct_Titlename_Add"
+                  render={() => <div className="text-red mt-1" style={{fontSize: '10pt'}}>*เลือกคำนำหน้าเชื่อ</div>}
+                />
+              </div>
+              {TitlenameVal_CT === 'OtherTitle' && (
+                <div className="col-md-1 mb-3">
+                  <div className="fontBoldHearder">ระบุ<span style={{color: 'red'}}>*</span> :</div>
+                  <input type="text" className={`${errors.stc_BookingDate_Add ? 'borderRed' : ''} form-control`} name="stc_ct_TitlenameOT_Add" id="stc_ct_TitlenameOT_Add" maxLength={50} placeholder="ระบุ" 
+                  {...register("stc_ct_TitlenameOT_Add", { required: true})}
+                  onChange={(e) => setTitlenameOT_CT(e.target.value)} 
+                  />
+                  {errors.stc_ct_TitlenameOT_Add && errors.stc_ct_TitlenameOT_Add.type === "required" && <div className="text-red mt-1" style={{fontSize: '10pt'}}>*โปรดระบุ</div>}
+                </div>
+              )}
+            </div>{/* /.row */}
           </div> {/* card-body */}
           <div className="card-footer">
             <div className="row">
