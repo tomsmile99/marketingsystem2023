@@ -16,25 +16,19 @@ import th from 'date-fns/locale/th';
 import "react-datepicker/dist/react-datepicker.css";
 
 import { DatetimeFM_database } from '../../../layouts/includes/setFuctions/Datetimethai'
+import { isNumber, idCardCheck } from '../../../layouts/includes/setFuctions/Inputfuntion'
 
 
 
 const AddData = () => {
 
   const [TitlenameVal, setTitlenameVal] = useState(''); //ตัวแปรในการเลือกคำหน้าชื่อ
-  //const [TitlenameOT, setTitlenameOT] = useState('');
-
-  // const handleTitleChange = (event) => {
-  //   setTitlenameVal(event.target.value);
-
-  //   console.log(event.target.value)
-  // };
-
-  console.log(TitlenameVal)
+  const [TitlenameOT, setTitlenameOT] = useState(''); //คำหน้าชื่ออื่นๆ
+  //console.log(TitlenameOT)
 
 
   const {
-    //register,
+    register,
     control,
     handleSubmit,
     formState: { errors },
@@ -43,48 +37,30 @@ const AddData = () => {
   },{ validateHiddenInputs: true });
 
 
-  /*
-  const {
-    register,
-    control,
-    reset,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    mode: "onBlur"
-  },{ validateHiddenInputs: true });
-  */
-
-  /*
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  */
   const sendForm = (data) => {
     //console.log(Datetimethai_ForApi(data.stc_BookingDate_Add))
     const dataSet = {
       stc_BookingDate_Add : DatetimeFM_database(data.stc_BookingDate_Add), // วันที่จอง
-      stc_seller_affiliation_Add : 'SAK'  // สังกัดผู้จอง
+      stc_seller_affiliation_Add : 'SAK',  // สังกัดผู้ทำใบจอง
+      stc_sa_Titlename_Add : data.stc_sa_Titlename_Add,  // คำนำหน้าชื่อ (ผู้ขาย)
+      stc_sa_TitlenameOT_Add :  TitlenameOT, // คำนำหน้าชื่อ อื่นๆ (ผู้ขาย)
+      stc_sa_Fullname_Add :  data.stc_sa_Fullname_Add, // ชื่อ - นามสกุล (ผู้ขาย)
     }
 
+    // เมื่อต้องการเอาค่าอื่นเข้ามาเสียบเพิ่มเติม
     // const newdatas = {
     //   firstNew: 'Wes',
     //   lastNew: 'Bos',
     // };
 
-
     const newDataSend = {
       ...dataSet,
       // ...newdatas
     };
-
     console.log(newDataSend)
   }
   
-
+ 
 
   return (
     <>
@@ -124,27 +100,27 @@ const AddData = () => {
               <div className="col-md-2 mb-2">
                 <div className="fontBoldHearder"><i className="fas fa-calendar-alt"></i> วันที่จอง <span style={{color: 'red'}}>*</span> : </div> 
                 <Controller
-                    name="stc_BookingDate_Add"
-                    control={control}
-                    rules={{ required : true }}
-                    render={({ field }) => ( <DatePicker
-                        className={`${errors.stc_BookingDate_Add ? 'borderRed' : ''} form-control cursor_P`}
-                        id="stc_BookingDate_Add"
-                        autoComplete="off" placeholderText="ว-ด-ป"
-                        dateFormat="dd-MM-yyyy"
-                        locale={th}
-                        selected={field.value}
-                        onChange={(date) => field.onChange(date)}
-                        maxDate={subDays(new Date(), +1)}
-                        // minDate={subDays(new Date(), 7)}
-                      />
-                    )}
-                  />
-                  <ErrorMessage
-                    errors={errors}
-                    name="stc_BookingDate_Add"
-                    render={() => <div className="text-red mt-1" style={{fontSize: '10pt'}}>*เลือกวันที่ลืมลงเวลา</div>}
-                  />
+                  name="stc_BookingDate_Add"
+                  control={control}
+                  rules={{ required : true }}
+                  render={({ field }) => ( <DatePicker
+                    className={`${errors.stc_BookingDate_Add ? 'borderRed' : ''} form-control cursor_P`}
+                    id="stc_BookingDate_Add"
+                    autoComplete="off" placeholderText="ว-ด-ป"
+                    dateFormat="dd-MM-yyyy"
+                    locale={th}
+                    selected={field.value}
+                    onChange={(date) => field.onChange(date)}
+                    maxDate={subDays(new Date(), +1)}
+                    // minDate={subDays(new Date(), 7)}
+                    />
+                  )}
+                />
+                <ErrorMessage
+                  errors={errors}
+                  name="stc_BookingDate_Add"
+                  render={() => <div className="text-red mt-1" style={{fontSize: '10pt'}}>*เลือกวันที่ลืมลงเวลา</div>}
+                />
               </div>
               <div className="col-md-10 mb-2">
                 <div className="fontBoldHearder">สังกัดผู้จัดทำใบสั่งจอง<span style={{color: 'red'}}>*</span> :</div>
@@ -206,12 +182,61 @@ const AddData = () => {
               </div>
               {TitlenameVal === 'OtherTitle' && (
                 <div className="col-md-1 mb-3">
-                  <label htmlFor="stc_sa_TitlenameOT_Add">ระบุ<span style={{color: 'red'}}>*</span> :</label>
-                  <input type="text" className="form-control" name="stc_sa_TitlenameOT_Add" id="stc_sa_TitlenameOT_Add" maxLength={50} placeholder="ระบุ" /><span className="myErrors" />
+                  <div className="fontBoldHearder">ระบุ<span style={{color: 'red'}}>*</span> :</div>
+                  <input type="text" className={`${errors.stc_BookingDate_Add ? 'borderRed' : ''} form-control`} name="stc_sa_TitlenameOT_Add" id="stc_sa_TitlenameOT_Add" maxLength={50} placeholder="ระบุ" 
+                  {...register("stc_sa_TitlenameOT_Add", { required: true})}
+                  onChange={(e) => setTitlenameOT(e.target.value)} 
+                  />
+                  {errors.stc_sa_TitlenameOT_Add && errors.stc_sa_TitlenameOT_Add.type === "required" && <div className="text-red mt-1" style={{fontSize: '10pt'}}>*โปรดระบุ</div>}
                 </div>
               )}
-            </div>{/* /.row */}   
+              <div className="col-md-3 mb-2">
+                <div className="fontBoldHearder">ชื่อ - นามสกุล ของผู้ขาย<span style={{color: 'red'}}>*</span> :</div>
+                <input type="text" className={`${errors.stc_BookingDate_Add ? 'borderRed' : ''} form-control`} name="stc_sa_Fullname_Add" id="stc_sa_Fullname_Add" maxLength={200} placeholder="กรอกชื่อ-นามสกุล ของผู้ขาย" {...register("stc_sa_Fullname_Add", { required: true})}/>
+                {errors.stc_sa_Fullname_Add && errors.stc_sa_Fullname_Add.type === "required" && <div className="text-red mt-1" style={{fontSize: '10pt'}}>*กรอกชื่อ - นามสกุล ของผู้ขาย</div>}
+              </div>
+              <div className="col-md-3 mb-2">
+                <div className="fontBoldHearder">หมายเลขบัตรประชาชน 13 หลัก<span style={{color: 'red'}}>*</span> :</div>
+                <input type="text" className={`${errors.stc_sa_idCard_Add ? 'borderRed' : ''} form-control`} name="stc_sa_idCard_Add" id="stc_sa_idCard_Add" maxLength={13} placeholder="กรอกหมายเลขบัตรประชาชน 13 หลัก"
+                onKeyDown={isNumber}
+                {...register("stc_sa_idCard_Add", 
+                { required : true, 
+                  minLength : 13,
+                  maxLength : 13,
+                  pattern : {
+                    value: /^(0|[1-9]\d*)(\.\d+)?$/
+                  },
+                  validate : idCardCheck
+                })}
+                />
+                {errors.stc_sa_idCard_Add && errors.stc_sa_idCard_Add.type === "required" && <div className="text-red mt-1" style={{fontSize: '10pt'}}>*กรอกหมายเลขบัตรประชาชน 13 หลัก</div>}
+                {errors.stc_sa_idCard_Add && errors.stc_sa_idCard_Add.type === "minLength" && <div className="text-red mt-1" style={{fontSize: '10pt'}}>*ท่านกรอกไม่ครบ 13 หลัก</div>}
+                {errors.stc_sa_idCard_Add && errors.stc_sa_idCard_Add.type === "maxLength" && <div className="text-red mt-1" style={{fontSize: '10pt'}}>*ห้ามเกิน 13 หลัก</div>}
+                {errors.stc_sa_idCard_Add && errors.stc_sa_idCard_Add.type === "pattern" && <div className="text-red mt-1" style={{fontSize: '10pt'}}>*ตัวเลขเท่านั้น</div>}
+                {errors.stc_sa_idCard_Add && errors.stc_sa_idCard_Add.type === "validate" && <div className="text-red mt-1" style={{fontSize: '10pt'}}>*หมายเลขบัตรประชาชนไม่ถูกต้อง</div>}
+              </div>
+              <div className="col-md-3 mb-2">
+                <label>หมายเลขโทรศัพท์ 10 หลัก<span style={{color: 'red'}}>*</span> :</label>
+                <input type="text" className="form-control col-md-10" name="stc_sa_Phone_Add" id="stc_sa_Phone_Add" maxLength={10}  placeholder="กรอกหมายเลขโทรศัพท์ 10 หลัก" 
+                onKeyDown={isNumber}
+                {...register("stc_sa_Phone_Add", 
+                { required : true, 
+                  minLength : 10,
+                  maxLength : 10,
+                  pattern : {
+                    value: /^(0|[1-9]\d*)(\.\d+)?$/
+                  }
+                })}
+                />
+                {errors.stc_sa_Phone_Add && errors.stc_sa_Phone_Add.type === "required" && <div className="text-red mt-1" style={{fontSize: '10pt'}}>*กรอกหมายเลขโทรศัพท์ 10 หลัก</div>}
+                {errors.stc_sa_Phone_Add && errors.stc_sa_Phone_Add.type === "minLength" && <div className="text-red mt-1" style={{fontSize: '10pt'}}>*ท่านกรอกไม่ครบ 10 หลัก</div>}
+                {errors.stc_sa_Phone_Add && errors.stc_sa_Phone_Add.type === "maxLength" && <div className="text-red mt-1" style={{fontSize: '10pt'}}>*ห้ามเกิน 10 หลัก</div>}
+                {errors.stc_sa_Phone_Add && errors.stc_sa_Phone_Add.type === "pattern" && <div className="text-red mt-1" style={{fontSize: '10pt'}}>*ตัวเลขเท่านั้น</div>}
+              </div>
 
+
+            </div>{/* /.row */}   
+            <hr/>
 
 
           </div> {/* card-body */}
